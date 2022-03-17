@@ -1,6 +1,8 @@
 package com.tienda.controller;
 
+import com.tienda.entity.Pais;
 import com.tienda.entity.Persona;
+import com.tienda.service.IPaisService;
 import com.tienda.service.IPersonaService;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,8 +18,10 @@ public class PersonaController {
 
     @Autowired
     private IPersonaService personaService;
+    @Autowired
+    private IPaisService paisService;
 
-    @GetMapping({"/personas"})
+    @GetMapping({"/persona"})
     public String index(Model model) {
         List<Persona> listaPersona = personaService.getAllPersona();//nos devuelve una lista de persona
         model.addAttribute("titule", "Personas");
@@ -27,7 +31,9 @@ public class PersonaController {
 
     @GetMapping("/personasN")
     public String crearPersona(Model model) {
+        List<Pais> listaPais = paisService.listCountry();
         model.addAttribute("personas", new Persona());
+        model.addAttribute("paises", listaPais);
         return "crear";
     }
 
