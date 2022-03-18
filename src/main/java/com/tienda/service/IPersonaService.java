@@ -12,5 +12,7 @@ public interface IPersonaService {
     public void savePersona(Persona persona); 
     public Persona getPersonaById(long id); 
     public void delete(long id);
+
+    public Persona getPersonById(Long idPersona);
     
 }

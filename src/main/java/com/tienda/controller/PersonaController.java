@@ -24,15 +24,24 @@ public class PersonaController {
     @GetMapping({"/persona"})
     public String index(Model model) {
         List<Persona> listaPersona = personaService.getAllPersona();//nos devuelve una lista de persona
-        model.addAttribute("titule", "Personas");
-        model.addAttribute("personas", listaPersona);
-        return "personas";
+        model.addAttribute("titulo", "Personas");
+        model.addAttribute("persona", listaPersona);
+        return "persona";
     }
 
-    @GetMapping("/personasN")
+    @GetMapping("/personaN")
     public String crearPersona(Model model) {
         List<Pais> listaPais = paisService.listCountry();
-        model.addAttribute("personas", new Persona());
+        model.addAttribute("persona", new Persona());
+        model.addAttribute("paises", listaPais);
+        return "crear";
+    }
+    
+     @GetMapping("/editPersona/{id}")
+    public String editarPersona(@PathVariable("id") Long idPersona, Model model) {
+        Persona persona = personaService.getPersonById(idPersona);
+        List<Pais> listaPais = paisService.listCountry();
+        model.addAttribute("personas", persona);
         model.addAttribute("paises", listaPais);
         return "crear";
     }
