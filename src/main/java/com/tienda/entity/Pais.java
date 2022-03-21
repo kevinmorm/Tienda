@@ -8,7 +8,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-
+//se define la entidad y la tabla paises
 @Entity
 @Table(name="paises")
 public class Pais implements Serializable {
