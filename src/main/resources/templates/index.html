@@ -1,15 +1,23 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
     <head>
-        <title>Home - </title>
-        
+        <title>Proyecto Tienda</title>
+        <link href="../static/css/home.css" rel="stylesheet" type="text/css"/>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
     </head>
     <body>
-        <div>Salidos</div>
-        <p th:text="Hola"></p>
-    
+        <header th:replace="layout/plantilla :: header"/>
+        <div class="contenido">
+            <h2 th:text="#{index.titulo}">Nuestros_Articulos</h2>
+            <div th:if="${articulos != null and !articulos.empty}">
+                <>
+            </div>
+        
+        
+        
+        
+        </div>
     
     
     </body>
