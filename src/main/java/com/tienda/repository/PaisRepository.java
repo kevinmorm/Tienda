@@ -6,7 +6,9 @@ package com.tienda.repository;
 
 import com.tienda.entity.Pais;
 import org.springframework.data.repository.CrudRepository;
+import org.springframework.stereotype.Repository;
 
-public interface PaisRepository extends CrudRepository<Pais, Long>{
-    
+@Repository //para indicar que va hacer un repositorio 
+//hereda las funciones de crud repository
+public interface PaisRepository extends CrudRepository<Pais, Long>{ 
 }

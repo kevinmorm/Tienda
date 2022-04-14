@@ -1,24 +1,29 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-    <head>
-        <title>TODO supply a title</title>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <head th:replace="plantilla/template::head">
+
     </head>
-    <body>
+    <body style="background-size:cover;  background-image: url(https://images.pexels.com/photos/92248/pexels-photo-92248.jpeg?cs=srgb&dl=pexels-justin-hamilton-92248.jpg&fm=jpg)" >
+     
+        <header th:replace="plantilla/template::header"></header> <!-- reemplaza el titulo -->
         <h1 th:text="${titulo}"></h1>
-        <table>
+        <h1 style="color: white;" th:text="#{personas.titulo}"></h1>
+        <div style="text-align:center;">
+        <table style="width: 1400px;  margin-left: 80px; text-align: center;" class="table table-dark table-striped"><!-- crea la tabla con esa clase -->
 
 
 
             <thead class="thead-dark">
                 <tr>
-                    <th scope="col">Nombre </th>
-                    <th scope="col">Apellido 1 </th>
-                    <th scope="col">Apellido 2 </th>
-                    <th scope="col">Email </th>
-                    <th scope="col">Telefono </th>
-                    <th scope="col">Eliminar </th>
+                    <!-- Internacionalizacion en las tablas -->
+                    <th scope="col" th:text="#{personas.nombre}">Nombre </th>
+                    <th scope="col" th:text="#{personas.ap1}">Apellido 1 </th>
+                    <th scope="col" th:text="#{personas.ap2}">Apellido 2 </th>
+                    <th scope="col" th:text="#{personas.email}">Email </th>
+                    <th scope="col" th:text="#{personas.tele}">Telefono </th>
+                    <th scope="col" th:text="#{personas.pais}">Pais </th>
+                    <th scope="col" th:text="#{personas.editar}">Editar</th>
+                    <th scope="col" th:text="#{personas.elim}">Eliminar</th>
                 </tr>
             </thead>
 
@@ -32,13 +37,20 @@
                     <td th:text="${user.getApellido2}"></td>
                     <td th:text="${user.getEmail}"></td>
                     <td th:text="${user.getTelefono}"></td>
+                    <td th:text="${user.getPais.getPais}"></td> 
+
                     <td>
-                        <a th:href="@{/delete/{id}(id=${user.getId})}">Delete</a>
-                        <a th:href="@{/editPersona/{id}(id=${user.getId})}">Edit</a>
+                        <a th:href="@{/editPersona/{id}(id=${user.getId})}" th:text="#{personas.editar}">Editar</a>
+                    </td>
+                    <td>
+                        <a th:href="@{/delete/{id}(id=${user.getId})}" th:text="#{personas.elim}">Delete</a>
                     </td>
                 </tr>
             </th:block>
         </tbody>
-    </table>
-</body>
+
+    </table></div>
+        <a style="margin-left: 200px;" th:href="@{/personas/agregar}" class="btn btn-primary btn-sm mb3" th:text="#{personas.add}">Agregar persona</a>
+    <footer th:replace="plantilla/template::footer">  
+    </body>
 </html>

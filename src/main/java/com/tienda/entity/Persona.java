@@ -1,9 +1,9 @@
 package com.tienda.entity;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.io.Serializable;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -24,15 +24,23 @@ public class Persona implements Serializable {
     private String apellido2;
     private String telefono;
     private String email;
-    
-    private String password;
+
+    private String password ="";
     private int active;
     private String roles = "";
     private String permissions = "";
-    
-    @ManyToOne
-    @JoinColumn (name="paises_id")
-    private Pais pais; 
+
+    @ManyToOne//estamos haciendo una relacion de un a muchos 
+    @JoinColumn(name = "paises_id")//para indicar que mi paises id es una Llave foranea, AQUI
+    private Pais pais; //que lo va a obtener de mi clase pais y va a guardar mi id de pais 
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
 
     public String getNombre() {
         return nombre;
@@ -40,15 +48,6 @@ public class Persona implements Serializable {
 
     public void setNombre(String nombre) {
         this.nombre = nombre;
-    }
-
-    
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
     }
 
     public String getApellido1() {
@@ -83,6 +82,14 @@ public class Persona implements Serializable {
         this.email = email;
     }
 
+    public Pais getPais() {
+        return pais;
+    }
+
+    public void setPais(Pais pais) {
+        this.pais = pais;
+    }
+
     public String getPassword() {
         return password;
     }
@@ -115,29 +122,18 @@ public class Persona implements Serializable {
         this.permissions = permissions;
     }
 
-    public Pais getPais() {
-        return pais;
+    public List<String> getRoleList() {
+        if (this.roles.length() > 0) {
+            return Arrays.asList(this.roles.split(","));
+        }
+        return new ArrayList<>();
     }
 
-    public void setPais(Pais pais) {
-        this.pais = pais;
+    public List<String> getPermissionList() {
+        if (this.permissions.length() > 0) {
+            return Arrays.asList(this.permissions.split(","));
+        }
+        return new ArrayList<>();
     }
-
-    
-   public List<String> getRoleList() {
-if (this.roles.length() > 0) {
-return Arrays.asList(this.roles.split(","));
-}
-return new ArrayList<>();
-}
-
-
-
-public List<String> getPermissionList() {
-if (this.permissions.length() > 0) {
-return Arrays.asList(this.permissions.split(","));
-}
-return new ArrayList<>();
-}
 
 }

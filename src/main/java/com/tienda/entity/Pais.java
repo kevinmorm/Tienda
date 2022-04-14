@@ -5,19 +5,18 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-//se define la entidad y la tabla paises
-@Entity
-@Table(name="paises")
+//Clase para las entidades donde se va a guardar la informacion
+
+@Entity //para definir la entidad pais
+@Table(name="paises") // para nombrar la tabla paises
 public class Pais implements Serializable {
-    @Id
-    @GeneratedValue(strategy=GenerationType.IDENTITY)//se va a ingresando los datos
+    @Id //para indicar que nuestro id es nuestra llave primaria 
+    @GeneratedValue(strategy=GenerationType.IDENTITY)//se va a ingresando los datos incrementando uno+
+    
+    
     private long id;
     private String pais; 
-    
-    
 
     public long getId() {
         return id;

@@ -5,6 +5,7 @@ import com.tienda.entity.Persona;
 import com.tienda.service.IPaisService;
 import com.tienda.service.IPersonaService;
 import java.util.List;
+import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -16,47 +17,47 @@ import org.springframework.web.bind.annotation.PostMapping;
 @Controller
 public class PersonaController {
 
-    @Autowired
+    @Autowired //inyectamos la interface donde estan los metodos, este caso esto es nuestro Service
     private IPersonaService personaService;
     @Autowired
-    private IPaisService paisService;
+    private IPaisService paisService; 
 
-    @GetMapping({"/persona"})
-    public String index(Model model) {
+    @GetMapping({"/personas"})
+    public String index(Model model) { //nos hace un objeto de tipo model
         List<Persona> listaPersona = personaService.getAllPersona();//nos devuelve una lista de persona
-        model.addAttribute("titulo", "Personas");
-        model.addAttribute("persona", listaPersona);
+        model.addAttribute("titule", "Personas");//cambia el titulo por una persona
+        model.addAttribute("personas", listaPersona);//cuando encuente uno de persona va a cambiarlo por una lista
         return "persona";
     }
 
-    @GetMapping("/personaN")
+    @GetMapping("/personas/agregar")
     public String crearPersona(Model model) {
-        List<Pais> listaPais = paisService.listCountry();
-        model.addAttribute("persona", new Persona());
-        model.addAttribute("paises", listaPais);
-        return "crear";
-    }
-    
-     @GetMapping("/editPersona/{id}")
-    public String editarPersona(@PathVariable("id") Long idPersona, Model model) {
-        Persona persona = personaService.getPersonById(idPersona);
-        List<Pais> listaPais = paisService.listCountry();
-        model.addAttribute("personas", persona);
-        model.addAttribute("paises", listaPais);
+        List<Pais> listaPais= paisService.listaCountry(); 
+        model.addAttribute("personas", new Persona());//donde vea personas el va a crear un objecto de tipo persona
+        model.addAttribute("paises", listaPais); 
         return "crear";
     }
 
     @PostMapping("/save")
     public String guardarPersona(@ModelAttribute Persona persona) {
         personaService.savePersona(persona);
-        return "redirect:/persona";
+        return "redirect:/personas";
+    }
+    
+    @GetMapping("/editPersona/{id}")
+    public String editarPersona(@PathVariable("id") Long idPersona, Model model) {
+        Optional<Persona> persona= personaService.getPersonaById(idPersona);
+        List<Pais> listaPais= paisService.listaCountry(); 
+        model.addAttribute("personas", persona);
+        model.addAttribute("paises", listaPais); 
+        return "crear";
     }
 
     @GetMapping("/delete/{id}")
-    public String eliminarPersona(@PathVariable("id") Long idPerosna) {
+    public String eliminarPersona(@PathVariable("id") Long idPersona, Model model) {
 
-        personaService.delete(idPerosna);
-        return "redirect: /persona";
+        personaService.delete(idPersona);
+        return "redirect:/personas";
 
     }
 }

@@ -18,5 +18,5 @@ public interface IPaisService {
     public Persona getPaisbyId(long id); 
     public void delete(long id);
 
-    public List<Pais> listCountry();
+    public List<Pais> listaCountry();
 }

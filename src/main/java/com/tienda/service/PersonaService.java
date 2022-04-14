@@ -7,43 +7,46 @@ package com.tienda.service;
 import com.tienda.entity.Persona;
 import com.tienda.repository.PersonaRepository;
 import java.util.List;
+import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-@Service
+
+@Service //Para saber que es un servcio
 public class PersonaService implements IPersonaService{
-    
+    //Nos permite hacer una inyeccion de depencias 
     @Autowired
-    private PersonaRepository personaRepository; 
+    private PersonaRepository personaRepository; //instanciamos la personaRepository 
 
     @Override
     public List<Persona> getAllPersona() {
-        return(List<Persona>)personaRepository.findAll();
+        return(List<Persona>)personaRepository.findAll();// nos devulve una lista de persona por nuestro repositorio
+        //esto se optiene de CrudRepository
     }
 
     @Override
-    public void savePersona(Persona persona) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public int savePersona(Persona persona) {
+       int res=0; 
+         Persona p= personaRepository.save(persona); // aqui se guarda la persona 
+         if (!p.equals(null)) { //que sea diferente a null
+             res=1; 
+         }
+         return res; 
     }
 
     @Override
-    public Persona getPersonaById(long id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public Optional<Persona> getPersonaById(long id) {
+        return personaRepository.findById(id); 
     }
 
     @Override
     public void delete(long id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public Persona getPersonById(Long idPersona) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        personaRepository.deleteById(id);
     }
 
     @Override
     public Persona findByNombre(String nombre) {
-        return personaRepository.findByNombre(nombre);
+        return personaRepository.findByNombre(nombre); 
     }
     
 }

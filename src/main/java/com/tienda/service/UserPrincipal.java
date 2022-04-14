@@ -31,7 +31,7 @@ public class UserPrincipal  implements UserDetails{
             GrantedAuthority authority = new SimpleGrantedAuthority(p);
             authorities.add(authority);
         });
-        
+        /* buscar lista de roles */
         this.persona.getPermissionList().forEach(r -> {
             GrantedAuthority authority = new SimpleGrantedAuthority("ROLE_" + r);
             authorities.add(authority);

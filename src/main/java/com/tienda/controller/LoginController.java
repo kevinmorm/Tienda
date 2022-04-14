@@ -1,14 +1,17 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package com.tienda.controller;
+
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
-@Controller
+
+@Controller//nos permite que por medio de un URL se ejecute el login en este caso
+@Slf4j
 public class LoginController {
-    @GetMapping({"/"})
-    public String index(){
-        return "login";
+
+    @GetMapping({"/","/login"}) // Para que nos diriga a la pagina login
+    public String index() {
+        return "login";//devuelve login
+
     }
+
 }

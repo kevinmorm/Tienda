@@ -1,11 +1,66 @@
 <!DOCTYPE html>
-<html>
-    <head>
-        <title>TODO supply a title</title>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<html xmlns:th="http://www.thymeleaf.org">
+    <head th:replace="plantilla/template::head">
+
     </head>
-    <body>
-        <div>TODO write content</div>
+    <body style="background-size:cover;  background-image: url(https://images.pexels.com/photos/92248/pexels-photo-92248.jpeg?cs=srgb&dl=pexels-justin-hamilton-92248.jpg&fm=jpg)" >
+     
+        <header th:replace="plantilla/template::header"></header>
+
+        <!-- Formulario -->
+        <h1 style="color:white; text-align: center;">Nueva Persona</h1>
+        <a th:href="@{/}"></a>
+        <br>
+
+        <form style="margin-left: 280px;" th:action="@{/save}" method="post" th:object="${personas}">
+
+            <input type="hidden" th:field="*{id}">
+            <div class="row mb-3">
+                <label for="inputEmail3" class="col-sm-2 col-form-label" style=" padding-left: 140px; color:white;">Nombre</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" style="width: 480px;" id="inputEmail3" name="nombre" th:field="*{nombre}">
+                </div>
+            </div>
+            <div class="row mb-3">
+                <label for="inputPassword3" class="col-sm-2 col-form-label" style=" padding-left: 140px; color:white;">Primer Apellido</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" style="width: 480px;" id="inputPassword3" name="apellido1" th:field="*{apellido1}">
+                </div>
+            </div>
+            <div class="row mb-3">
+                <label for="inputPassword3" class="col-sm-2 col-form-label" style=" padding-left: 140px; color:white;">Segundo Apellido</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" id="inputPassword3" style="width: 480px;"  name="apellido2" th:field="*{apellido2}">
+                </div>
+            </div>
+            <div class="row mb-3">
+                <label for="inputPassword3" class="col-sm-2 col-form-label" style=" padding-left: 140px; color:white;">Telefono</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" id="inputPassword3" style="width: 480px;" name="telefono" th:field="*{telefono}">
+                </div>
+            </div>
+            <div class="row mb-3">
+                <label for="inputPassword3" class="col-sm-2 col-form-label"style=" padding-left: 140px; color:white;">Email</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" id="inputPassword3" style="width: 480px;" name="email" th:field="*{email}">
+                </div>
+            </div>
+            <div class="row mb-3">
+                <label for="inputPassword3" class="col-sm-2 col-form-label"style=" padding-left: 140px; color:white;">Clave</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" id="inputPassword3" style="width: 480px;" name="password" th:field="*{password}">
+                </div>
+            </div>
+            <label for="inputPassword3" class="col-sm-2 col-form-label" style=" margin-left: 140px; color:white;">Pais</label>
+            <select   class="form-select form-select-sm" style="width: 480px; margin-left: 220px;" aria-label=".form-select-sm example" th:field="*{pais}">
+                <option th:each="x:${paises}"
+                        th:value="${x.id}"
+                        th:text="${x.pais}"/>
+            </select>
+            <button type="submit" value="Guardar"class="btn btn-primary" >Guardar</button>
+        </form>
+        <footer th:replace="plantilla/template::footer"></footer>
     </body>
 </html>
+
